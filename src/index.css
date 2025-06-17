@@ -1,20 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Lato:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100..700&display=swap");
+
+:root {
+  /* 🎨 COLORS */
+  --color-primary-green: #2d635e;
+  --color-primary-yellow-pink: #fae9e0;
+
+  --color-secondary-light-gray: #e3ebe7;
+  --color-secondary-deep-green: #444a4a;
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+  --color-info: #17a2b8;
+
+  --color-bg: var(--color-white);
+  --color-text: var(--color-secondary-deep-green);
+  --color-button: var(--color-primary-green);
+  --color-accent: var(--color-primary-yellow-pink);
+
+  /* 🅰️ TYPOGRAPHY */
+  --font-family-primary: "Josefin Sans", sans-serif;
+  --font-family-secondary: "Alegreya Sans", sans-serif;
+  --font-family-cursive: "Cedarville Cursive", sans-serif;
+
+  --font-family-display: "George Round", sans-serif;
+
+  --font-size-base: 1rem; /* 16px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md: 1.188rem; /* 19px */
+  --font-size-lg: 1.75rem; /* 28px */
+  --font-size-xl: 2.375rem; /* 38px */
+  --font-size-2xl: 3.938rem; /* 63px */
+
+  --font-size-text-button: 1.25rem;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  --line-height-base: 1.6;
+  --line-height-tight: 1.2;
+
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+
+  /* 🔲 BORDERS */
+  --border-radius-sm: 5px;
+  --border-radius-md: 7px;
+
+  /* 🌫 SHADOWS */
+  --shadow-sm: 0 7px 10px 0 rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 23px 34px 0 rgba(35, 57, 55, 0.17);
+}
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: 'Raleway', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(#29251c, #2c2306);
-  color: #d9e2f1;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
   min-height: 100vh;
 }
 
-#main-header {
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+/* #main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -37,11 +108,11 @@ body {
 
 #main-header button {
   font-size: 1.5rem;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 h1 {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 700;
   font-size: 2rem;
   margin: 0;
@@ -281,4 +352,4 @@ h1 {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */

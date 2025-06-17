@@ -1,0 +1,23 @@
+.header {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-black);
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link:hover {
+  color: var(--color-primary-green);
+}
+
+.badge {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+}

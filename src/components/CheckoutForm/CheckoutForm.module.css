@@ -1,0 +1,15 @@
+.checkoutForm {
+  width: 100%;
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+}

@@ -1,0 +1,10 @@
+.section {
+  padding: 2rem 0;
+  background-color: var(--color-secondary-light-gray);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+}

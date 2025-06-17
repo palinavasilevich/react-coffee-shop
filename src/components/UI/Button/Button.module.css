@@ -1,0 +1,36 @@
+.button {
+  padding: 1rem 1.5rem;
+  display: inline-flex;
+  /* gap: 0.5rem; */
+  align-items: center;
+  justify-content: center;
+  border: none;
+  text-decoration: none;
+  color: var(--color-white);
+  font-size: var(--font-size-text-button);
+  font-family: var(--font-family-button);
+  border-radius: var(--border-radius-md);
+  background-color: var(--color-button);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.icon {
+  color: var(--color-white);
+  stroke-width: 4;
+  height: 2.5rem;
+}
+
+.button:hover,
+.button:focus {
+  box-shadow: none;
+}
+
+.roundButton {
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
