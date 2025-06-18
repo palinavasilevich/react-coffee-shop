@@ -24,7 +24,7 @@ export const Header = ({ onOpenCart }) => {
             <h1 className={cls.logoTitle}>Samwayle</h1>
           </li>
 
-          <li>
+          {/* <li>
             <a href="#about" className={cls.link}>
               About us
             </a>
@@ -46,7 +46,7 @@ export const Header = ({ onOpenCart }) => {
             <a href="#contacts" className={cls.link}>
               Contacts
             </a>
-          </li>
+          </li> */}
 
           <li>
             <Button icon={CartIcon} onClick={onOpenCart} roundButton>
