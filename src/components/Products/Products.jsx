@@ -14,11 +14,10 @@ import { Button } from "../UI/Button";
 import cls from "./Products.module.css";
 
 export const Products = ({ onGoToCart }) => {
-  const { isModalOpen, openModal, closeModal } = useModal();
-
   const { products } = use(ProductsContext);
-
   const { addItemToCart } = use(ShoppingCartContext);
+
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const handleAddItemToCart = (item) => {
     addItemToCart(item);

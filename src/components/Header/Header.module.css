@@ -1,4 +1,8 @@
 .header {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+
   font-weight: var(--font-weight-bold);
   color: var(--color-black);
 }
@@ -7,6 +11,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoImg {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+}
+
+.logoTitle {
+  margin-left: 0.5rem;
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-family-cursive);
 }
 
 .link:hover {
