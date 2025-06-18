@@ -9,13 +9,12 @@ export const Button = ({
 }) => {
   const Icon = icon;
 
+  const cssClasses = `${cls.button} ${
+    roundButton ? cls.roundButton : ""
+  } ${className}`;
+
   return (
-    <button
-      className={`${cls.button} ${
-        roundButton ? cls.roundButton : ""
-      } ${className}`}
-      {...props}
-    >
+    <button className={cssClasses} {...props}>
       {icon && <Icon className={cls.icon} />}
       {children}
     </button>
