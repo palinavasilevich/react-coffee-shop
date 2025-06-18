@@ -8,15 +8,17 @@ export const ProductCard = ({ product, onAddItemToCart }) => {
   };
 
   return (
-    <div className={cls.productCard}>
+    <article className={cls.productCard}>
       <img
         src={`${API_URL}/${product.image}`}
         alt={product.name}
         className={cls.img}
       />
-      <p className={cls.title}>{product.name}</p>
-      <span className={cls.price}>€{product.price}</span>
+      <div>
+        <h3 className={cls.title}>{product.name}</h3>
+        <p className={cls.price}>€{product.price}</p>
+      </div>
       <Button onClick={handleAddItemToCart}>Add to Cart</Button>
-    </div>
+    </article>
   );
 };
