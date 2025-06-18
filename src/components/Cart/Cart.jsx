@@ -2,17 +2,17 @@ import { use } from "react";
 import { ShoppingCartContext } from "../../store/shopping-cart-context";
 import { Button } from "../UI/Button";
 
+import {
+  getFormattedTotalPrice,
+  getTotalPrice,
+} from "../../utils/getTotalPrice";
+
 import cls from "./Cart.module.css";
 
 export const Cart = ({ onGoToCheckout }) => {
   const { items, updateItemQuantity } = use(ShoppingCartContext);
 
-  const totalPrice = items.reduce(
-    (acc, item) => acc + Number(item.price) * item.quantity,
-    0
-  );
-
-  const formattedTotalPrice = `€${totalPrice.toFixed(2)}`;
+  const formattedTotalPrice = getFormattedTotalPrice(getTotalPrice(items));
 
   return (
     <div className={cls.cart}>

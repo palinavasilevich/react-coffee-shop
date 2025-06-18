@@ -1,7 +1,8 @@
 import { createContext, useReducer } from "react";
+import { storage } from "../utils/storage";
 
 export const ShoppingCartContext = createContext({
-  items: [],
+  items: storage.getItem("items") || [],
   addItemToCart: () => {},
   updateItemQuantity: () => {},
   clearCart: () => {},
@@ -31,6 +32,8 @@ function shoppingCartReducer(state, action) {
       });
     }
 
+    storage.setItem("items", updatedItems);
+
     return {
       ...state,
       items: updatedItems,
@@ -57,6 +60,8 @@ function shoppingCartReducer(state, action) {
       updatedItems[updatedItemIndex] = updatedItem;
     }
 
+    storage.setItem("items", updatedItems);
+
     return {
       ...state,
       items: updatedItems,
@@ -64,6 +69,8 @@ function shoppingCartReducer(state, action) {
   }
 
   if (action.type === "CLEAR_CART") {
+    storage.removeItem("items");
+
     return {
       ...state,
       items: [],
@@ -77,7 +84,7 @@ export function ShoppingCartContextProvider({ children }) {
   const [shoppingCartState, shoppingCartDispatch] = useReducer(
     shoppingCartReducer,
     {
-      items: [],
+      items: storage.getItem("items") || [],
     }
   );
 

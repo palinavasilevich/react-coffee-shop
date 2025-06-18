@@ -9,10 +9,16 @@ import { ProductsContext } from "../../store/products-context";
 import { isEmail, isNotEmpty } from "../../utils/validation";
 
 import cls from "./CheckoutForm.module.css";
+import {
+  getFormattedTotalPrice,
+  getTotalPrice,
+} from "../../utils/getTotalPrice";
 
 export const CheckoutForm = ({ onOpenNotificationModal }) => {
   const { addOrder } = use(ProductsContext);
   const { items, clearCart } = use(ShoppingCartContext);
+
+  const formattedTotalPrice = getFormattedTotalPrice(getTotalPrice(items));
 
   async function checkoutFormAction(_prevFormState, formData) {
     try {
@@ -95,6 +101,7 @@ export const CheckoutForm = ({ onOpenNotificationModal }) => {
 
   return (
     <form action={formAction} className={cls.checkoutForm}>
+      <p>{formattedTotalPrice}</p>
       <Input
         id="fullName"
         name="fullName"
