@@ -101,7 +101,7 @@ export const CheckoutForm = ({ onOpenNotificationModal }) => {
 
   return (
     <form action={formAction} className={cls.checkoutForm}>
-      <p>{formattedTotalPrice}</p>
+      <p className={cls.price}>Total price: {formattedTotalPrice}</p>
       <Input
         id="fullName"
         name="fullName"

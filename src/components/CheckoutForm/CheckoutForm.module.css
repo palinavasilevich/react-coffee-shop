@@ -13,3 +13,8 @@
   justify-content: space-between;
   gap: 3rem;
 }
+
+.price {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
