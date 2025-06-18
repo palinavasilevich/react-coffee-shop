@@ -1,4 +1,5 @@
 import { API_URL } from "../../constants";
+import { currencyFormatter } from "../../utils/currencyFormatter";
 import { Button } from "../UI/Button";
 import cls from "./ProductCard.module.css";
 
@@ -16,7 +17,7 @@ export const ProductCard = ({ product, onAddItemToCart }) => {
       />
       <div>
         <h3 className={cls.title}>{product.name}</h3>
-        <p className={cls.price}>€{product.price}</p>
+        <p className={cls.price}>{currencyFormatter.format(product.price)}</p>
       </div>
       <Button onClick={handleAddItemToCart}>Add to Cart</Button>
     </article>
