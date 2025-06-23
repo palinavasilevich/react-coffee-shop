@@ -6,7 +6,3 @@ export function getTotalPrice(items) {
 
   return totalPrice;
 }
-
-export function getFormattedTotalPrice(totalPrice, currencySymbol = "€") {
-  return `${currencySymbol}${totalPrice.toFixed(2)}`;
-}

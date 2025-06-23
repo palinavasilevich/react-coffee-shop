@@ -1,11 +1,19 @@
-import { API_URL } from "../../constants";
-import { currencyFormatter } from "../../utils/currencyFormatter";
-import { Button } from "../UI/Button";
+import { use } from "react";
+
+import ShoppingCartContext from "../../../store/shopping-cart-context";
+
+import { Button } from "../../UI/Button";
+
+import { API_URL } from "../../../constants";
+import { currencyFormatter } from "../../../utils/currencyFormatter";
+
 import cls from "./ProductCard.module.css";
 
-export const ProductCard = ({ product, onAddItemToCart }) => {
+export const ProductCard = ({ product }) => {
+  const { addItemToCart } = use(ShoppingCartContext);
+
   const handleAddItemToCart = () => {
-    onAddItemToCart(product);
+    addItemToCart(product);
   };
 
   return (

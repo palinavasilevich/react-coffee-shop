@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 import { storage } from "../utils/storage";
 
-export const ShoppingCartContext = createContext({
+const ShoppingCartContext = createContext({
   items: storage.getItem("items") || [],
   addItemToCart: () => {},
   updateItemQuantity: () => {},
@@ -9,8 +9,6 @@ export const ShoppingCartContext = createContext({
 });
 
 function shoppingCartReducer(state, action) {
-  const product = action.payload;
-
   if (action.type === "ADD_ITEM") {
     const updatedItems = [...state.items];
 
@@ -19,6 +17,7 @@ function shoppingCartReducer(state, action) {
     );
 
     const existingCartItem = updatedItems[existingCartItemIndex];
+
     if (existingCartItem) {
       const updatedItem = {
         ...existingCartItem,
@@ -27,7 +26,7 @@ function shoppingCartReducer(state, action) {
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {
       updatedItems.push({
-        ...product,
+        ...action.payload,
         quantity: 1,
       });
     }
@@ -41,11 +40,11 @@ function shoppingCartReducer(state, action) {
   }
 
   if (action.type === "UPDATE_ITEM") {
-    const { productId, amount } = action.payload;
+    const { itemId, amount } = action.payload;
 
     const updatedItems = [...state.items];
     const updatedItemIndex = updatedItems.findIndex(
-      (item) => item.id === productId
+      (item) => item.id === itemId
     );
 
     const updatedItem = {
@@ -88,14 +87,14 @@ export function ShoppingCartContextProvider({ children }) {
     }
   );
 
-  function handleAddItemToCart(product) {
-    shoppingCartDispatch({ type: "ADD_ITEM", payload: product });
+  function handleAddItemToCart(item) {
+    shoppingCartDispatch({ type: "ADD_ITEM", payload: item });
   }
 
-  function handleUpdateCartItemQuantity(productId, amount) {
+  function handleUpdateCartItemQuantity(itemId, amount) {
     shoppingCartDispatch({
       type: "UPDATE_ITEM",
-      payload: { productId, amount },
+      payload: { itemId, amount },
     });
   }
 
@@ -105,7 +104,7 @@ export function ShoppingCartContextProvider({ children }) {
     });
   }
 
-  const contextValue = {
+  const shoppingCartContext = {
     items: shoppingCartState.items,
     addItemToCart: handleAddItemToCart,
     updateItemQuantity: handleUpdateCartItemQuantity,
@@ -113,6 +112,10 @@ export function ShoppingCartContextProvider({ children }) {
   };
 
   return (
-    <ShoppingCartContext value={contextValue}>{children}</ShoppingCartContext>
+    <ShoppingCartContext value={shoppingCartContext}>
+      {children}
+    </ShoppingCartContext>
   );
 }
+
+export default ShoppingCartContext;

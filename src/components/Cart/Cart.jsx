@@ -1,64 +1,62 @@
 import { use } from "react";
-import { ShoppingCartContext } from "../../store/shopping-cart-context";
-import { Button } from "../UI/Button";
+import ShoppingCartContext from "../../store/shopping-cart-context";
 
-import {
-  getFormattedTotalPrice,
-  getTotalPrice,
-} from "../../utils/getTotalPrice";
+import { Button } from "../UI/Button";
+import { Modal } from "../UI/Modal";
+
+import { getTotalPrice } from "../../utils/getTotalPrice";
+import { currencyFormatter } from "../../utils/currencyFormatter";
 
 import cls from "./Cart.module.css";
+import UserProgressContext from "../../store/user-progress-context";
+import { USER_PROGRESS_STATE } from "../../constants";
+import { CartItem } from "./CartItem/CartItem";
 
-export const Cart = ({ onGoToCheckout }) => {
+export const Cart = () => {
   const { items, updateItemQuantity } = use(ShoppingCartContext);
+  const { progress, showCheckout, hideCart } = use(UserProgressContext);
 
-  const formattedTotalPrice = getFormattedTotalPrice(getTotalPrice(items));
+  const cartTotalPrice = getTotalPrice(items);
+
+  function handleCloseCart() {
+    hideCart();
+  }
 
   return (
-    <div className={cls.cart}>
+    <Modal
+      className={cls.cart}
+      isOpen={progress === USER_PROGRESS_STATE.CART}
+      onClose={handleCloseCart}
+    >
+      <h2>Your Cart</h2>
       {items.length === 0 && <p className={cls.text}>No items in cart!</p>}
       {items.length > 0 && (
         <>
           <ul className={cls.products}>
             {items.map((item) => {
-              const formattedPrice = `€${Number(item.price).toFixed(2)}`;
-
               return (
-                <li key={item.id} className={cls.item}>
-                  <div>
-                    <span>{item.name}</span>
-                    <span> - {item.quantity} x </span>
-                    <span>({formattedPrice})</span>
-                  </div>
-                  <div className={cls.actions}>
-                    <Button
-                      onClick={() => updateItemQuantity(item.id, -1)}
-                      roundButton
-                    >
-                      -
-                    </Button>
-                    <span>{item.quantity}</span>
-                    <Button
-                      onClick={() => updateItemQuantity(item.id, 1)}
-                      roundButton
-                    >
-                      +
-                    </Button>
-                  </div>
-                </li>
+                <CartItem
+                  key={item.id}
+                  name={item.name}
+                  quantity={item.quantity}
+                  price={item.price}
+                  onIncrease={() => updateItemQuantity(item.id, 1)}
+                  onDecrease={() => updateItemQuantity(item.id, -1)}
+                />
               );
             })}
           </ul>
 
           <p className={cls.totalPrice}>
-            Cart Total: <strong>{formattedTotalPrice}</strong>
+            Cart Total:
+            <strong>{currencyFormatter.format(cartTotalPrice)}</strong>
           </p>
 
           <div className={cls.modalActions}>
-            <Button onClick={onGoToCheckout}>Go to Checkout</Button>
+            <Button onClick={showCheckout}>Go to Checkout</Button>
           </div>
         </>
       )}
-    </div>
+    </Modal>
   );
 };

@@ -1,24 +1,22 @@
 import { use, useActionState } from "react";
 
-import { ShoppingCartContext } from "../../store/shopping-cart-context";
+import { ProductsContext } from "../../store/products-context";
+import ShoppingCartContext from "../../store/shopping-cart-context";
 
 import { SubmitButton } from "../UI/SubmitButton";
 import { Input } from "../UI/Input";
 
-import { ProductsContext } from "../../store/products-context";
 import { isEmail, isNotEmpty } from "../../utils/validation";
+import { getTotalPrice } from "../../utils/getTotalPrice";
+import { currencyFormatter } from "../../utils/currencyFormatter";
 
 import cls from "./CheckoutForm.module.css";
-import {
-  getFormattedTotalPrice,
-  getTotalPrice,
-} from "../../utils/getTotalPrice";
 
 export const CheckoutForm = ({ onOpenNotificationModal }) => {
   const { addOrder } = use(ProductsContext);
   const { items, clearCart } = use(ShoppingCartContext);
 
-  const formattedTotalPrice = getFormattedTotalPrice(getTotalPrice(items));
+  const cartTotalPrice = getTotalPrice(items);
 
   async function checkoutFormAction(_prevFormState, formData) {
     try {
@@ -101,7 +99,9 @@ export const CheckoutForm = ({ onOpenNotificationModal }) => {
 
   return (
     <form action={formAction} className={cls.checkoutForm}>
-      <p className={cls.price}>Total price: {formattedTotalPrice}</p>
+      <p className={cls.price}>
+        Total price: {currencyFormatter.format(cartTotalPrice)}
+      </p>
       <Input
         id="fullName"
         name="fullName"

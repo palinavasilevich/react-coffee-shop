@@ -1,11 +1,10 @@
 import { use } from "react";
 
-import { ShoppingCartContext } from "../../store/shopping-cart-context";
-
 import { useModal } from "../../hooks/useModal.js";
 
 import { ProductsContext } from "../../store/products-context";
-import { ProductCard } from "../ProductCard/ProductCard";
+import ShoppingCartContext from "../../store/shopping-cart-context";
+import { ProductCard } from "./ProductCard";
 import { Notification } from "../Notification";
 
 import { Modal } from "../UI/Modal";
