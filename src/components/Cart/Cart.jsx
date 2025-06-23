@@ -50,7 +50,7 @@ export const Cart = () => {
           </ul>
 
           <p className={cls.totalPrice}>
-            Cart Total:
+            Cart Total:{" "}
             <strong>{currencyFormatter.format(cartTotalPrice)}</strong>
           </p>
 
