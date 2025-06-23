@@ -43,11 +43,11 @@
 }
 
 .actions {
+  min-width: 9rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
-  flex: 1;
 }
 
 .totalPrice {
@@ -56,5 +56,4 @@
 
 .modalActions {
   margin-top: 1.5rem;
-  /* text-align: right; */
 }
