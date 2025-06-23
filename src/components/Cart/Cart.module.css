@@ -17,15 +17,10 @@
   font-size: var(--font-size-md);
   font-weight: var(--border-radius-md);
 
-  /* background-color: var(--color-secondary-deep-green); */
-  /* color: var(--color-white); */
-
   cursor: pointer;
 }
 
 .closeBtn:hover {
-  /* box-shadow: var(--shadow-sm); */
-
   color: var(--color-primary-green);
 }
 

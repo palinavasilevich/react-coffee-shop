@@ -1,16 +1,18 @@
 import { use } from "react";
+
 import ShoppingCartContext from "../../store/shopping-cart-context";
+import UserProgressContext from "../../store/user-progress-context";
 
 import { Button } from "../UI/Button";
 import { Modal } from "../UI/Modal";
+import { CartItem } from "./CartItem/CartItem";
 
 import { getTotalPrice } from "../../utils/getTotalPrice";
 import { currencyFormatter } from "../../utils/currencyFormatter";
 
-import cls from "./Cart.module.css";
-import UserProgressContext from "../../store/user-progress-context";
 import { USER_PROGRESS_STATE } from "../../constants";
-import { CartItem } from "./CartItem/CartItem";
+
+import cls from "./Cart.module.css";
 
 export const Cart = () => {
   const { items, updateItemQuantity } = use(ShoppingCartContext);
@@ -28,7 +30,7 @@ export const Cart = () => {
       isOpen={progress === USER_PROGRESS_STATE.CART}
       onClose={handleCloseCart}
     >
-      <h2>Your Cart</h2>
+      <h2 className={cls.title}>Your Cart</h2>
       {items.length === 0 && <p className={cls.text}>No items in cart!</p>}
       {items.length > 0 && (
         <>
