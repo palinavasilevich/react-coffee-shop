@@ -7,6 +7,7 @@ import { UserProgressContextProvider } from "./store/user-progress-context";
 import { Header } from "./components/Header";
 import { Products } from "./components/Products";
 import { Cart } from "./components/Cart";
+import { CheckoutForm } from "./components/CheckoutForm/CheckoutForm";
 
 function App() {
   // const [notificationInfo, setNotificationInfo] = useState({
@@ -47,6 +48,7 @@ function App() {
             <Products />
           </main>
           <Cart />
+          <CheckoutForm />
         </ShoppingCartContextProvider>
       </ProductsContextProvider>
     </UserProgressContextProvider>

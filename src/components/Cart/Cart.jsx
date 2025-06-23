@@ -24,11 +24,15 @@ export const Cart = () => {
     hideCart();
   }
 
+  function handleGoToCheckout() {
+    showCheckout();
+  }
+
   return (
     <Modal
       className={cls.cart}
       isOpen={progress === USER_PROGRESS_STATE.CART}
-      onClose={handleCloseCart}
+      onClose={progress === USER_PROGRESS_STATE.CART ? handleCloseCart : null}
     >
       <h2 className={cls.title}>Your Cart</h2>
       {items.length === 0 && <p className={cls.text}>No items in cart!</p>}
@@ -55,7 +59,7 @@ export const Cart = () => {
           </p>
 
           <div className={cls.modalActions}>
-            <Button onClick={showCheckout}>Go to Checkout</Button>
+            <Button onClick={handleGoToCheckout}>Go to Checkout</Button>
           </div>
         </>
       )}

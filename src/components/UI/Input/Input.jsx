@@ -1,14 +1,17 @@
 import cls from "./Input.module.css";
 
-export const Input = ({ label, error, ...props }) => {
+export const Input = ({ id, label, error, ...props }) => {
   return (
     <div className={cls.inputContainer}>
-      <label htmlFor={props.id} className={cls.label}>
+      <label htmlFor={id} className={cls.label}>
         {label}
       </label>
       <input
-        className={`${cls.input} ${error ? cls.isNotValid : ""}`}
+        id={id}
+        name={id}
+        // required
         type="text"
+        className={`${cls.input} ${error ? cls.isNotValid : ""}`}
         {...props}
       />
       <div className={cls.controlError}>
