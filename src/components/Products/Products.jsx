@@ -1,51 +1,36 @@
-import { use } from "react";
-
-import { useModal } from "../../hooks/useModal.js";
-
-import { ProductsContext } from "../../store/products-context";
-import ShoppingCartContext from "../../store/shopping-cart-context";
 import { ProductCard } from "./ProductCard";
-import { Notification } from "../Notification";
-
-import { Modal } from "../UI/Modal";
-import { Button } from "../UI/Button";
+import { Loader } from "../UI/Loader";
+import useHttp from "../../hooks/useHttp";
+import { API_URL } from "../../constants";
 
 import cls from "./Products.module.css";
 
-export const Products = ({ onGoToCart }) => {
-  const { products } = use(ProductsContext);
-  const { addItemToCart } = use(ShoppingCartContext);
+const requestConfig = {};
 
-  const { isModalOpen, openModal, closeModal } = useModal();
+export const Products = () => {
+  const {
+    data: products,
+    error,
+    isLoading,
+  } = useHttp(`${API_URL}/products`, requestConfig, []);
 
-  const handleAddItemToCart = (item) => {
-    addItemToCart(item);
-    openModal();
-  };
-
-  const handleGoToCart = () => {
-    closeModal();
-    onGoToCart();
-  };
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      {/* <Modal isOpen={isModalOpen} onClose={closeModal}>
         <Notification text="The item has been added to your shopping cart.">
-          <Button onClick={handleGoToCart}>Go to Shopping cart</Button>
+          <Button onClick={addItemToCart}>Go to Shopping cart</Button>
         </Notification>
-      </Modal>
+      </Modal> */}
       <section className={cls.section}>
         <div className="container">
           <div className={cls.products}>
-            {products &&
-              products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  onAddItemToCart={handleAddItemToCart}
-                />
-              ))}
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </section>
