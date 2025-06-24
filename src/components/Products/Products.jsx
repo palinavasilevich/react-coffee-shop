@@ -13,7 +13,7 @@ export const Products = () => {
     data: products,
     error,
     isLoading,
-  } = useHttp(`${API_URL}/productss`, requestConfig, []);
+  } = useHttp(`${API_URL}/products`, requestConfig, []);
 
   if (isLoading) {
     return <Loader />;
