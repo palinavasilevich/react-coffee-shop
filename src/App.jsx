@@ -1,6 +1,3 @@
-import { useState } from "react";
-
-import { ProductsContextProvider } from "./store/products-context";
 import { ShoppingCartContextProvider } from "./store/shopping-cart-context";
 import { UserProgressContextProvider } from "./store/user-progress-context";
 
@@ -10,47 +7,16 @@ import { Cart } from "./components/Cart";
 import { CheckoutForm } from "./components/CheckoutForm/CheckoutForm";
 
 function App() {
-  // const [notificationInfo, setNotificationInfo] = useState({
-  //   text: "",
-  //   type: "",
-  // });
-
-  // const {
-  //   isModalOpen: isCartModalOpen,
-  //   openModal: openCartModal,
-  //   closeModal: closeCartModal,
-  // } = useModal();
-
-  // const {
-  //   isModalOpen: isCheckoutFormModalOpen,
-  //   openModal: openCheckoutFormModal,
-  //   closeModal: closeCheckoutFormModal,
-  // } = useModal();
-
-  // const {
-  //   isModalOpen: isNotificationModalOpen,
-  //   openModal: openNotificationModal,
-  //   closeModal: closeNotificationModal,
-  // } = useModal();
-
-  // const handleOpenNotificationModal = (text, type) => {
-  //   setNotificationInfo({ text, type });
-
-  //   openNotificationModal();
-  // };
-
   return (
     <UserProgressContextProvider>
-      <ProductsContextProvider>
-        <ShoppingCartContextProvider>
-          <Header />
-          <main>
-            <Products />
-          </main>
-          <Cart />
-          <CheckoutForm />
-        </ShoppingCartContextProvider>
-      </ProductsContextProvider>
+      <ShoppingCartContextProvider>
+        <Header />
+        <main>
+          <Products />
+        </main>
+        <Cart />
+        <CheckoutForm />
+      </ShoppingCartContextProvider>
     </UserProgressContextProvider>
   );
 }

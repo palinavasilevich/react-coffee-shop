@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useInput(defaultValue, validationFn) {
+export default function useInput(defaultValue, validationFn) {
   const [enteredValue, setEnteredValue] = useState(defaultValue);
   const [isEdited, setIsEdited] = useState(false);
 

@@ -1,13 +1,14 @@
 .header {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-
+  background-color: var(--color-white);
   font-weight: var(--font-weight-bold);
   color: var(--color-black);
 }
 
 .menu {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;

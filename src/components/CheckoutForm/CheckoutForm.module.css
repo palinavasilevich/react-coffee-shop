@@ -5,7 +5,12 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+
   gap: 1rem;
+}
+
+.modalText {
+  margin: 1.5rem 0;
 }
 
 .info {

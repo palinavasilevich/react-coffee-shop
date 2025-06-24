@@ -1,4 +1,4 @@
-import { use, useActionState } from "react";
+import { use, useActionState, useEffect, useState } from "react";
 
 import ShoppingCartContext from "../../store/shopping-cart-context";
 import UserProgressContext from "../../store/user-progress-context";
@@ -6,141 +6,193 @@ import UserProgressContext from "../../store/user-progress-context";
 import { SubmitButton } from "../UI/SubmitButton";
 import { Input } from "../UI/Input";
 import { Modal } from "../UI/Modal";
+import { Loader } from "../UI/Loader";
+import { ErrorComponent } from "../ErrorComponent";
+import { Button } from "../UI/Button";
 
 import { isEmail, isNotEmpty } from "../../utils/validation";
 import { getTotalPrice } from "../../utils/getTotalPrice";
 import { currencyFormatter } from "../../utils/currencyFormatter";
 
-import { USER_PROGRESS_STATE } from "../../constants";
+import useHttp from "../../hooks/useHttp";
+
+import { API_URL, USER_PROGRESS_STATE } from "../../constants";
 
 import cls from "./CheckoutForm.module.css";
-import { ProductsContext } from "../../store/products-context";
+
+const requestConfig = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 
 export const CheckoutForm = () => {
-  const { addOrder } = use(ProductsContext);
+  const [openModal, setOpenModal] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+
   const { items, clearCart } = use(ShoppingCartContext);
   const { progress, hideCheckout } = use(UserProgressContext);
 
   const cartTotalPrice = getTotalPrice(items);
 
-  // function handleCloseCheckoutForm() {}
+  const { data, error, sendRequest, clearData, clearError } = useHttp(
+    `${API_URL}/orderss`,
+    requestConfig
+  );
+
+  function handleFinish() {
+    hideCheckout();
+    clearCart();
+    clearData();
+  }
+
+  function handleCloseCheckoutForm() {
+    setFormErrors({});
+    hideCheckout();
+  }
+
+  function handleClearError(fieldName) {
+    setFormErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      delete newErrors[fieldName];
+      return newErrors;
+    });
+  }
+
+  function handleCloseModal() {
+    clearError();
+    setOpenModal(false);
+  }
 
   async function checkoutFormAction(_prevFormState, formData) {
     try {
+      setFormErrors({});
+
       const userData = Object.fromEntries(formData.entries());
+      const errors = {};
 
-      // const fullName = formData.get("full-name");
-      // const email = formData.get("email");
-      // const street = formData.get("street");
-      // const postalCode = formData.get("postal-code");
-      // const city = formData.get("city");
+      Object.keys(userData).forEach((fieldName) => {
+        if (!isNotEmpty(userData[fieldName])) {
+          errors[fieldName] = `Please enter ${fieldName}.`;
+        }
 
-      let errors = {};
-
-      if (!isNotEmpty(userData.name)) {
-        errors.fullName = "Please enter your name.";
-      }
-
-      if (!isNotEmpty(userData.email) || !isEmail(userData.email)) {
-        errors.email = "Please enter valid email.";
-      }
-
-      if (!isNotEmpty(userData.street)) {
-        errors.street = "Please enter your street.";
-      }
-
-      if (!isNotEmpty(userData["postal-code"])) {
-        errors.postalCode = "Please enter your postal code.";
-      }
-
-      if (!isNotEmpty(userData.city)) {
-        errors.city = "Please enter your city.";
-      }
-
-      if (Object.values(errors).length > 0) {
-        return {
-          errors,
-          enteredValues: {
-            ...userData,
-          },
-        };
-      }
-
-      await addOrder({
-        order: {
-          items: items,
-          customer: userData,
-        },
+        if (fieldName === "email" && !isEmail(userData[fieldName])) {
+          errors[fieldName] = `Please enter a valid email.`;
+        }
       });
 
-      // onOpenNotificationModal(
-      //   "Your order was submitted successfully.",
-      //   "success"
-      // );
+      setFormErrors(errors);
 
-      clearCart();
+      if (Object.keys(errors).length > 0) {
+        return { enteredValues: userData };
+      }
 
-      return { errors: null };
+      sendRequest(
+        JSON.stringify({
+          order: {
+            items,
+            customer: userData,
+          },
+        })
+      );
     } catch (error) {
       console.error(error.message);
-
-      // onOpenNotificationModal(error.message, "error");
-
-      return {};
     }
+
+    return {};
   }
 
-  const [formState, formAction] = useActionState(checkoutFormAction, {
-    errors: null,
-  });
+  const [formState, formAction, isSending] = useActionState(
+    checkoutFormAction,
+    {}
+  );
+
+  useEffect(() => {
+    if (error) {
+      setOpenModal(true);
+    }
+  }, [error]);
+
+  if (data && !error) {
+    return (
+      <Modal
+        isOpen={progress === USER_PROGRESS_STATE.CHECKOUT}
+        onClose={handleFinish}
+      >
+        <h2>Success!</h2>
+        <p className={cls.modalText}>Your order was submitted successfully.</p>
+        <p className={cls.modalText}>
+          We will get back to you with more details via email within the next
+          few minutes.
+        </p>
+        <div className={cls.modalActions}>
+          <Button onClick={handleFinish}>Okay</Button>
+        </div>
+      </Modal>
+    );
+  }
 
   return (
-    <Modal
-      isOpen={progress === USER_PROGRESS_STATE.CHECKOUT}
-      onClose={hideCheckout}
-    >
-      <form action={formAction} className={cls.checkoutForm}>
-        <h2>Checkout</h2>
-        <p className={cls.price}>
-          Total price: {currencyFormatter.format(cartTotalPrice)}
-        </p>
-        <Input
-          id="name"
-          label="Full Name"
-          defaultValue={formState.enteredValues?.fullName}
-          error={formState.errors?.fullName}
-        />
-        <Input
-          id="email"
-          label="Email"
-          type="email"
-          defaultValue={formState.enteredValues?.email}
-          error={formState.errors?.email}
-        />
-        <Input
-          id="street"
-          label="Street"
-          defaultValue={formState.enteredValues?.street}
-          error={formState.errors?.street}
-        />
-        <div className={cls.info}>
-          <Input
-            id="postal-code"
-            label="Postal Code"
-            type="number"
-            defaultValue={formState.enteredValues?.postalCode}
-            error={formState.errors?.postalCode}
-          />
-          <Input
-            id="city"
-            label="City"
-            defaultValue={formState.enteredValues?.city}
-            error={formState.errors?.city}
-          />
-        </div>
+    <>
+      <Modal isOpen={openModal} onClose={handleCloseModal}>
+        <ErrorComponent title="Failed to submit order." message={error} />
+      </Modal>
 
-        <SubmitButton text="Submit Order" />
-      </form>
-    </Modal>
+      <Modal
+        isOpen={progress === USER_PROGRESS_STATE.CHECKOUT}
+        onClose={handleCloseCheckoutForm}
+      >
+        <form action={formAction} className={cls.checkoutForm}>
+          <h2>Checkout</h2>
+          <p className={cls.price}>
+            Total price: {currencyFormatter.format(cartTotalPrice)}
+          </p>
+          <Input
+            id="name"
+            label="Full Name"
+            defaultValue={formState.enteredValues?.name}
+            error={formErrors?.name}
+            onFocus={() => handleClearError("name")}
+          />
+          <Input
+            id="email"
+            label="Email"
+            type="email"
+            defaultValue={formState.enteredValues?.email}
+            error={formErrors?.email}
+            onFocus={() => handleClearError("email")}
+          />
+          <Input
+            id="street"
+            label="Street"
+            defaultValue={formState.enteredValues?.street}
+            error={formErrors?.street}
+            onFocus={() => handleClearError("street")}
+          />
+          <div className={cls.info}>
+            <Input
+              id="postal-code"
+              label="Postal Code"
+              type="number"
+              defaultValue={formState.enteredValues?.postalCode}
+              error={formErrors["postal-code"]}
+              onFocus={() => handleClearError("postal-code")}
+            />
+            <Input
+              id="city"
+              label="City"
+              defaultValue={formState.enteredValues?.city}
+              error={formErrors?.city}
+              onFocus={() => handleClearError("city")}
+            />
+          </div>
+
+          {isSending && <Loader />}
+
+          <SubmitButton text="Submit Order" />
+        </form>
+      </Modal>
+    </>
   );
 };

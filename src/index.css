@@ -65,16 +65,11 @@
 }
 
 body {
+  min-height: 100dvh;
   font-family: var(--font-family-primary);
   font-size: var(--font-size-base);
   color: var(--color-text);
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 2rem;
+  background-color: var(--color-secondary-light-gray);
 }
 
 a {
