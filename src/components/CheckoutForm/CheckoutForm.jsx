@@ -37,7 +37,7 @@ export const CheckoutForm = () => {
   const cartTotalPrice = getTotalPrice(items);
 
   const { data, error, sendRequest, clearData, clearError } = useHttp(
-    `${API_URL}/orderss`,
+    `${API_URL}/orders`,
     requestConfig
   );
 
