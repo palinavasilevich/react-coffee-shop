@@ -1,0 +1,13 @@
+.error {
+  width: 90%;
+  max-width: 25rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: var(--color-accent);
+  color: var(--color-error-text);
+  border-radius: var(--border-radius-md);
+}
+
+.message {
+  margin-top: 0.75rem;
+}

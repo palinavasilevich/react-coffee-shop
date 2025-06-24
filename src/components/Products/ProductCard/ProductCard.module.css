@@ -28,12 +28,12 @@
   min-height: 7rem;
   font-family: var(--font-family-cursive);
   font-weight: var(--font-weight-normal);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   line-height: 1.1;
 }
 
 .price {
   font-family: var(--font-family-secondary);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }

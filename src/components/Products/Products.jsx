@@ -4,6 +4,7 @@ import useHttp from "../../hooks/useHttp";
 import { API_URL } from "../../constants";
 
 import cls from "./Products.module.css";
+import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 
 const requestConfig = {};
 
@@ -12,10 +13,14 @@ export const Products = () => {
     data: products,
     error,
     isLoading,
-  } = useHttp(`${API_URL}/products`, requestConfig, []);
+  } = useHttp(`${API_URL}/productss`, requestConfig, []);
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (error) {
+    return <ErrorComponent title="Failed to fetch products." message={error} />;
   }
 
   return (
