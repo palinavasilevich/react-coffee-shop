@@ -1,4 +1,7 @@
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background-color: var(--color-white);
   font-weight: var(--font-weight-bold);
   color: var(--color-black);
