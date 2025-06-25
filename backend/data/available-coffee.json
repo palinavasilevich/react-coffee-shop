@@ -1,0 +1,37 @@
+[
+  {
+    "id": "m1",
+    "name": "19grams - Dolce Vita Espresso",
+    "price": "9.90",
+    "description": "Für diese Espressoröstung haben wir uns von den sonnenverwöhnten Ebenen Brasiliens und dem italienischen Lebensgefühl inspirieren lassen.Der Kaffee vereint Aromen von Schokolade, karamellisierten Nüssen und saftigen Brombeeren zu einer harmonischen Geschmacksbalance aus Süße, Würze und dezenter Fruchtigkeit. Die dunkle Röstung verleiht dem Kaffee eine reichhaltige Intensität und Tiefe.",
+    "image": "images/19grams-la-dolce-vita-espresso.jpg"
+  },
+  {
+    "id": "m2",
+    "name": "Sometime - Contemp 1 Espresso",
+    "price": "9.90",
+    "description": "Contemp 1 ist ein klassischer Espresso mit viel natürlicher Süße und einem erwartbaren Geschmacksprofil ohne viel Säure. Das Zusammenspiel unserer Kaffees aus Brasilien, Kolumbien und Indien erinnert an Schokolade, Nougat und geröstete Haselnüsse. Stark für sich alleine oder angenehm wahrnehmbar in Kombination mit (Hafer)Milch, ist er der ideale Espresso für jeden Tag.",
+    "image": "images/sometime-contemp-1.jpg"
+  },
+  {
+    "id": "m3",
+    "name": "Wildkaffee - Vienna Calling Espresso",
+    "price": "14.90",
+    "description": "Seinen Namen hat der Kaffee in Anlehnung an einen Song von Falco, einem der bekanntesten österreichischen Musiker, erhalten. Ziemlich passend für diesen ersten Blend von Wildkaffee 2.0, oder? 100 Prozent Arabica-Bohnen, dunkel geröstet, ergeben einen beerigen, schokoladigen Espresso.",
+    "image": "images/wildkaffee-vienna-calling-espresso.jpg"
+  },
+  {
+    "id": "m4",
+    "name": "Impact Coffee - Limmu Blend Omni-Roast Bio",
+    "price": "9.90",
+    "description": "Speziell entwickelt für alle, die es etwas kräftiger mögen, aber nicht auf die einzigartigen, schokoladigen Aromen unseres Single Origin Limmu verzichten möchten: Greift zu unserem Limmu Blend und verbessert dabei ein Stück weit die Welt. Denn IMPACT COFFEE setzt sich mit seinem Specialty Coffee für den Aufbau von Kunststoff-Recycling in Äthiopien ein. So reduziert unser Kaffee nicht nur riesige Mengen Wasser, sondern auch Energie, CO2, Rohöl und Plastikmüll. Mach mit beim #schlürfenforabetterworld!",
+    "image": "images/IMPACT-COFFEE-Limmu-Blend-Omni-Roast-Bio.webp"
+  },
+  {
+    "id": "m5",
+    "name": "Hoppenworth & Ploch - Café Crème Bio",
+    "price": "10.90",
+    "description": "Der Bio Café Crème ist unser Allrounder! Als klassischer Crème aus dem Siebträger überzeugt er durch einen nussig-schokoladigen Geschmack, als Espresso können wir Mandeln und ein leichtes Apfelaroma entdecken und im Filterkaffee haben wir ein klassisches Aromenprofil von Pekannüssen und Bitterschokolade - ein richtiger Allrounder eben!",
+    "image": "images/hoppenworth-ploch-bio-cafe-creme.webp"
+  }
+]
