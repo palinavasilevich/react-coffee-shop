@@ -37,3 +37,12 @@
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
 }
+
+.modal {
+  padding: 2rem;
+}
+
+.modalText {
+  margin-bottom: 1rem;
+  font-size: var(--font-size-md);
+}
